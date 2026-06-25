@@ -5,23 +5,20 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 public class Intake extends SubsystemBase {
     private final TalonFX intakeMotor;
-
+    private static final double INTAKE_SPEED = 0.5;
+    private static final double OUTTAKE_SPEED = -0.5;
     public Intake(int motorID) {
         intakeMotor = new TalonFX(motorID);
     }
-    public void Intake(double speed) {
-        intakeMotor.set(speed);
+    public void intake() {
+        intakeMotor.set(INTAKE_SPEED);
     }
-    public void outtake(double speed) {
-        intakeMotor.set(-speed);
+    public void outtake() {
+        intakeMotor.set(OUTTAKE_SPEED);
     }
     public void stop() {
-        intakeMotor.set(0);
+        intakeMotor.stopMotor();
     }
-    public double getSpeed() {
-        return intakeMotor.get();
-    }
-    public void setSpeed(double speed) {
-        intakeMotor.set(speed);
-    }
+
+
 }
