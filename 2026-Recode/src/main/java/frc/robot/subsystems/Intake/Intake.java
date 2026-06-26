@@ -7,7 +7,8 @@ public class Intake extends SubsystemBase {
     private final TalonFX intakeMotor;
     private static final double INTAKE_SPEED = 0.5;
     private static final double OUTTAKE_SPEED = -0.5;
-    public Intake(int motorID) {
+    private static final int motorID=76;
+    public Intake() {
         intakeMotor = new TalonFX(motorID);
     }
     public void intake() {
