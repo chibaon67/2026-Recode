@@ -12,8 +12,11 @@ public class Tunnel extends SubsystemBase {
     public Tunnel(){
         tunnelMotor = new TalonFX(MOTOR_ID);
     }
-    public void runTunnel(){
+    public void intake(){
         tunnelMotor.set(MOTOR_SPEED);
+    }
+    public void outtake(){
+        tunnelMotor.set(-MOTOR_SPEED);
     }
     public void stop(){
         tunnelMotor.stopMotor();

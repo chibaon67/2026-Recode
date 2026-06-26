@@ -13,8 +13,11 @@ public class Hopper extends SubsystemBase {
     public Hopper(){
         hopperMotor= new TalonFX(MOTOR_ID);
     }
-    public void runHopper(){
+    public void intake(){
         hopperMotor.set(MOTOR_SPEED);
+    }
+    public void outtake(){
+        hopperMotor.set(-MOTOR_SPEED);
     }
     public void stop(){
         hopperMotor.stopMotor();
