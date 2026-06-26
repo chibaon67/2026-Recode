@@ -6,14 +6,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Hopper extends SubsystemBase {
     private final TalonFX hopperMotor;
-    private final int deviceID= 67;
-    private final double speed= 0.5;
+    private final int MOTOR_ID= 67;
+    private final double MOTOR_SPEED= 0.5;
 
     public Hopper(){
-        hopperMotor= new TalonFX(deviceID);
+        hopperMotor= new TalonFX(MOTOR_ID);
     }
     public void runHopper(){
-        hopperMotor.set(speed);
+        hopperMotor.set(MOTOR_SPEED);
     }
     public void stop(){
         hopperMotor.stopMotor();
