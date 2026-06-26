@@ -14,21 +14,26 @@ public class Intake extends SubsystemBase {
     public Intake() {
         intakeMotor = new TalonFX(MOTOR_ID);
     }
+
     public void intake() {
         intakeMotor.set(INTAKE_SPEED);
     }
+
     public void outtake() {
         intakeMotor.set(OUTTAKE_SPEED);
     }
+
     public void stop() {
         intakeMotor.stopMotor();
     }
+
     public double getCurrentRPS(){
         return intakeMotor.getRotorVelocity().getValueAsDouble();
     }
+    
     @Override
     public void periodic(){
-        Logger.recordOutput("Commanded Intake Speed", intakeMotor.get());
-        Logger.recordOutput("Current Intake RPS", getCurrentRPS());
+        Logger.recordOutput("Intake/CommandedSpeed", intakeMotor.get());
+        Logger.recordOutput("Intake/CurrentRPS", getCurrentRPS());
     }
 }

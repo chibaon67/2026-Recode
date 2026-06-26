@@ -6,27 +6,46 @@ import org.littletonrobotics.junction.Logger;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 public class Tunnel extends SubsystemBase {
-    private final TalonFX tunnelMotor;
-    private final int MOTOR_ID = 6767;
-    private final double MOTOR_SPEED=0.5;
+    private final TalonFX topTunnelMotor;
+    private final TalonFX bottomTunnelMotor;
+    private static final int TOP_MOTOR_ID = 6767;
+    private static final int BOTTOM_MOTOR_ID = 757575;
+    private static final double TOP_MOTOR_SPEED=0.5;
+    private static final double BOTTOM_MOTOR_SPEED=0.5;
+    
     public Tunnel(){
-        tunnelMotor = new TalonFX(MOTOR_ID);
+        topTunnelMotor = new TalonFX(TOP_MOTOR_ID);
+        bottomTunnelMotor = new TalonFX(BOTTOM_MOTOR_ID);
     }
+
     public void intake(){
-        tunnelMotor.set(MOTOR_SPEED);
+        topTunnelMotor.set(TOP_MOTOR_SPEED);
+        bottomTunnelMotor.set(BOTTOM_MOTOR_SPEED);
     }
+
     public void outtake(){
-        tunnelMotor.set(-MOTOR_SPEED);
+        topTunnelMotor.set(-TOP_MOTOR_SPEED);
+        bottomTunnelMotor.set(-BOTTOM_MOTOR_SPEED);
     }
+
     public void stop(){
-        tunnelMotor.stopMotor();
+        topTunnelMotor.stopMotor();
+        bottomTunnelMotor.stopMotor();
     }
-    public double getCurrentRPS(){
-        return tunnelMotor.getRotorVelocity().getValueAsDouble();
+
+    public double getTopCurrentRPS(){
+        return topTunnelMotor.getRotorVelocity().getValueAsDouble();
     }
+    public double getBottomCurrentRPS(){
+        return bottomTunnelMotor.getRotorVelocity().getValueAsDouble();
+    }
+
     @Override
     public void periodic(){
-        Logger.recordOutput("Commanded Tunnel Velocty", tunnelMotor.get());
-        Logger.recordOutput("Current Tunnel RPS", getCurrentRPS());
+        Logger.recordOutput("topTunnel/CommandedSpeed", topTunnelMotor.get());
+        Logger.recordOutput("topTunnel/CurrentRPS", getTopCurrentRPS());
+        Logger.recordOutput("bottomTunnel/CommandedSpeed", bottomTunnelMotor.get());
+        Logger.recordOutput("bottomTunnel/CurrentRPS", getBottomCurrentRPS());
     }
+
 }
