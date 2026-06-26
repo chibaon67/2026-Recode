@@ -3,6 +3,7 @@ package frc.robot.subsystems.Intake;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.littletonrobotics.junction.Logger;
 
 public class Hopper extends SubsystemBase {
     private final TalonFX hopperMotor;
@@ -17,5 +18,14 @@ public class Hopper extends SubsystemBase {
     }
     public void stop(){
         hopperMotor.stopMotor();
+    }
+
+    public double getCurrentRPS(){
+        return hopperMotor.getRotorVelocity().getValueAsDouble();
+    }
+    @Override
+    public void periodic(){
+        Logger.recordOutput("Expected Hopper Speed", hopperMotor.get());
+        Logger.recordOutput("Current Hopper RPS", getCurrentRPS());
     }
 }

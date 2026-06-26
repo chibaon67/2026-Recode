@@ -1,5 +1,8 @@
 package frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import org.littletonrobotics.junction.Logger;
+
 import com.ctre.phoenix6.hardware.TalonFX;
 
 public class Tunnel extends SubsystemBase {
@@ -14,5 +17,13 @@ public class Tunnel extends SubsystemBase {
     }
     public void stop(){
         tunnelMotor.stopMotor();
+    }
+    public double getCurrentRPS(){
+        return tunnelMotor.getRotorVelocity().getValueAsDouble();
+    }
+    @Override
+    public void periodic(){
+        Logger.recordOutput("Commanded Tunnel Velocty", tunnelMotor.get());
+        Logger.recordOutput("Current Tunnel RPS", getCurrentRPS());
     }
 }

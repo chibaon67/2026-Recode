@@ -1,6 +1,9 @@
 package frc.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import org.littletonrobotics.junction.Logger;
+
 import com.ctre.phoenix6.hardware.TalonFX;
 
 public class Intake extends SubsystemBase {
@@ -20,6 +23,12 @@ public class Intake extends SubsystemBase {
     public void stop() {
         intakeMotor.stopMotor();
     }
-
-
+    public double getCurrentRPS(){
+        return intakeMotor.getRotorVelocity().getValueAsDouble();
+    }
+    @Override
+    public void periodic(){
+        Logger.recordOutput("Commanded Intake Speed", intakeMotor.get());
+        Logger.recordOutput("Current Intake RPS", getCurrentRPS());
+    }
 }
