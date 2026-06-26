@@ -31,7 +31,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
   }
-
+  Drive.setDefaultCommmand(new DriveCommand(drive, () -> -driver.getLeftY(), () -> driver.getRightX())):
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
