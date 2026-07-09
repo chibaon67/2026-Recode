@@ -5,26 +5,33 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Tunnel extends SubsystemBase{
-    private final TalonFX tunnelMotor;
-    public Tunnel(int motorID){
-        tunnelMotor = new TalonFX(motorID);
+    private final TalonFX topTunnelMotor;
+    private final TalonFX bottomTunnelMotor;
+    public Tunnel(int topMotorID, int bottomMotorID){
+        topTunnelMotor = new TalonFX(topMotorID);
+        bottomTunnelMotor = new TalonFX(bottomMotorID);
     }
     public void run(boolean inverted){
         if(inverted)
         {
-            tunnelMotor.set(0.7);
+            topTunnelMotor.set(0.7);
+            bottomTunnelMotor.set(0.7);
         }
         else
         {
-            tunnelMotor.set(-0.7);
+            topTunnelMotor.set(-0.7);
+            bottomTunnelMotor.set(-0.7);
+
         }
         }
     public void setSpeed(int speed){
-        tunnelMotor.set(speed);
+        topTunnelMotor.set(0.7);
+        bottomTunnelMotor.set(0.7);
     }
 
     public void stopIntake(){
-        tunnelMotor.stopMotor();
+        topTunnelMotor.stopMotor();
+        bottomTunnelMotor.stopMotor();
     }
     }
     
