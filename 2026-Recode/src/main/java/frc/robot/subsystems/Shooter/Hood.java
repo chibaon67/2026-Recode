@@ -21,6 +21,10 @@ public class Hood extends SubsystemBase{
         }
     }
 
+    public void stop(){
+        hoodMotor.stopMotor();
+    }
+
     public Command upCommand(){
         return new RunCommand(()->adjustHood(false),this);
     }
@@ -28,6 +32,9 @@ public class Hood extends SubsystemBase{
     public Command downCommand(){
         return new RunCommand(()->adjustHood(true),this);
     }
-
+    
+    public Command stopCommand(){
+        return new RunCommand(()->stop(),this);
+    }
 
 }

@@ -19,7 +19,9 @@ public class Turret extends SubsystemBase{
             turretMotor.set(-0.3);
         }
     }
-
+    public void stop(){
+        turretMotor.stopMotor();
+    }
     public Command rightCommand(){
         return new RunCommand(()->adjustTurret(false), this);
     }
@@ -27,4 +29,10 @@ public class Turret extends SubsystemBase{
     public Command leftCommand(){
         return new RunCommand(()->adjustTurret(true),this);
     }
+
+      public Command stopCommand(){
+        return new RunCommand(()->stop(),this);
+    }
+
 }
+
