@@ -26,11 +26,11 @@ public class Hood extends SubsystemBase{
     }
 
     public Command upCommand(){
-        return new RunCommand(()->adjustHood(false),this);
+        return new RunCommand(()->adjustHood(true),this);
     }
     
     public Command downCommand(){
-        return new RunCommand(()->adjustHood(true),this);
+        return new RunCommand(()->adjustHood(false),this);
     }
     
     public Command stopCommand(){
