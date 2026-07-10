@@ -32,6 +32,16 @@ public class Hopper extends SubsystemBase{
     public Command intakeCommand(){
         return new RunCommand(()->run(false),this);
     }
+
+      public Command outtakeCommand(){
+        return new RunCommand(()-> run(true), this);
     }
+
+    public Command stopCommand(){
+        return new RunCommand(()->stopIntake(),this);
+    }
+    }
+    
+    
     
 

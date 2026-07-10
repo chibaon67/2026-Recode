@@ -9,9 +9,12 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-
+import frc.robot.subsystems.Shooter.*;
+import frc.robot.subsystems.Intake.*;
+import edu.wpi.first.wpilibj.XboxController;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -20,42 +23,38 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  // Replace with CommandPS4Controller or CommandJoystick if needed
+  public final Hood hood = new Hood(Constants.HoodConstants.HOOD_MOTOR_ID);
+  public final Turret turret = new Turret(Constants.TurretConstants.TURRET_MOTOR_ID);
+  public final Flywheel flywheel = new Flywheel(Constants.FlywheelConstants.FLYWHEEL_MOTOR_ID);
+  public final Hopper hopper = new Hopper(Constants.HopperConstants.HOPPER_MOTOR_ID);
+  public final Intake intake = new Intake(Constants.IntakeConstants.INTAKE_MOTOR_ID);
+  public final Tunnel tunnel = new Tunnel(Constants.TunnelConstants.TOP_TUNNEL_MOTOR_ID, Constants.TunnelConstants.BOTTOM_TUNNEL_MOTOR_ID);
+  // Our one Controller
+  private final CommandXboxController driverController = new CommandXboxController(0);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    configureBindings();
-  }
-  /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
-   * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
-   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
-   */
-  private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
-
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-    
+    configureButtonBindings();
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+
+  private void configureButtonBindings() {
+    intake.setDefaultCommand(intake.stopCommand().withName("stop intake"));
+    hopper.setDefaultCommand(hopper.stopCommand().withName("stop hopper"));
+    hood.setDefaultCommand(hood.stopCommand().withName("stop hood"));
+    flywheel.setDefaultCommand(flywheel.stopCommand().withName("stop flywheel"));
+    tunnel.setDefaultCommand(tunnel.stopCommand().withName("stop tunnel"));
+    turret.setDefaultCommand(turret.stopCommand().withName("stop turret"));
+
+    driverController.a().whileTrue(Commands.parallel(intake.intakeCommand(),tunnel.intakeCommand(), hopper.intakeCommand()));
+    driverController.b().whileTrue(Commands.parallel(intake.outtakeComand(),tunnel.outtakeCommand(), hopper.outtakeCommand()));
+    driverController.x().whileTrue(flywheel.spinCommand());
+    driverController.leftBumper().whileTrue(hood.downCommand());
+    driverController.rightBumper().whileTrue(hood.upCommand());
+    driverController.rightTrigger().whileTrue(turret.rightCommand());
+    driverController.leftTrigger().whileTrue(turret.leftCommand());
   }
+  
 }
