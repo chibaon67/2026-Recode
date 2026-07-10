@@ -3,6 +3,8 @@ package frc.robot.subsystems.Intake;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.Command;
 
 public class Hopper extends SubsystemBase{
     private final TalonFX hopperMotor;
@@ -25,6 +27,10 @@ public class Hopper extends SubsystemBase{
 
     public void stopIntake(){
         hopperMotor.stopMotor();
+    }
+
+    public Command intakeCommand(){
+        return new RunCommand(()->run(false),this);
     }
     }
     

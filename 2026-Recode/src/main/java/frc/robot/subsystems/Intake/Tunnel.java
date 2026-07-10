@@ -3,6 +3,11 @@ package frc.robot.subsystems.Intake;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 
 public class Tunnel extends SubsystemBase{
     private final TalonFX topTunnelMotor;
@@ -32,6 +37,19 @@ public class Tunnel extends SubsystemBase{
     public void stopIntake(){
         topTunnelMotor.stopMotor();
         bottomTunnelMotor.stopMotor();
+    }
+
+
+    public Command intakeCommand(){
+        return new RunCommand(()->run(false), this);
+    }
+
+    public Command outtakeCommand(){
+        return new RunCommand(()-> run(true), this);
+    }
+
+    public Command stopCommand(){
+        return new RunCommand(()->stopIntake(),this);
     }
     }
     

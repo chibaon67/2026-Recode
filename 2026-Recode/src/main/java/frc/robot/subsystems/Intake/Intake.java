@@ -3,6 +3,8 @@ package frc.robot.subsystems.Intake;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.Command;
 
 public class Intake extends SubsystemBase{
     private final TalonFX intakeMotor;
@@ -25,6 +27,18 @@ public class Intake extends SubsystemBase{
 
     public void stopIntake(){
         intakeMotor.stopMotor();
+    }
+
+    public Command intakeCommand(){
+        return new RunCommand(()->run(false),this);
+    }
+
+    public Command outtakeComand(){
+        return new RunCommand(()->run(true),this);
+    }
+
+    public Command stopCommand(){
+        return new RunCommand(()->stopIntake(),this);
     }
     }
     
