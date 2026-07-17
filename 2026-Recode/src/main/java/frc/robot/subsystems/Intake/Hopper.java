@@ -2,9 +2,16 @@ package frc.robot.subsystems.Intake;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+import com.ctre.phoenix6.hardware.TalonFX;
+import edu.wpi.first.networktables.DoubleEntry;
+// NetworkTable imports
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.littletonrobotics.junction.Logger;
 
 
 public class Hopper extends SubsystemBase{
@@ -42,5 +49,6 @@ public class Hopper extends SubsystemBase{
     public Command stopCommand(){
         return new RunCommand(()->stopIntake(),this);
     }
+    
 }
 
