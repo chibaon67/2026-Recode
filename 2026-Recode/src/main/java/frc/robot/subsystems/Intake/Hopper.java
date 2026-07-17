@@ -16,9 +16,15 @@ import org.littletonrobotics.junction.Logger;
 
 public class Hopper extends SubsystemBase{
     private final TalonFX hopperMotor;
-    
+      final DoubleEntry hopperSpeedEntry; 
+
     public Hopper(int motorID){
         hopperMotor = new TalonFX(motorID);
+         // Hopper Network Table
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable hopperTable = inst.getTable("Subsystems/Hopper");
+    hopperSpeedEntry = hopperTable.getDoubleTopic("hopperSpeed").getEntry(0);
+    hopperSpeedEntry.set(0.3);
     }
     public void run(boolean inverted){
         if(inverted)
@@ -49,6 +55,15 @@ public class Hopper extends SubsystemBase{
     public Command stopCommand(){
         return new RunCommand(()->stopIntake(),this);
     }
-    
+
+
+  @Override
+  public void periodic() {
+    Logger.recordOutput("Hopper/statorCurrent", hopperMotor.getStatorCurrent().getValueAsDouble());
+    Logger.recordOutput("Hopper/supplyCurrent", hopperMotor.getStatorCurrent().getValueAsDouble());
+  }
+
 }
+    
+
 
