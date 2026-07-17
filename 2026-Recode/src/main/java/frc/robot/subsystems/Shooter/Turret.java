@@ -13,10 +13,10 @@ public class Turret extends SubsystemBase{
     }
     public void adjustTurret(boolean left){
         if(left){
-            turretMotor.set(0.3);
+            turretMotor.set(0.09);
         }
         else{
-            turretMotor.set(-0.3);
+            turretMotor.set(-0.09);
         }
     }
     public void stop(){

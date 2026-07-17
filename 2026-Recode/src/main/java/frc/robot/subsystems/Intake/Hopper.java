@@ -14,11 +14,11 @@ public class Hopper extends SubsystemBase{
     public void run(boolean inverted){
         if(inverted)
         {
-            hopperMotor.set(0.7);
+            hopperMotor.set(-0.7);
         }
         else
         {
-            hopperMotor.set(-0.7);
+            hopperMotor.set(0.7);
         }
         }
     public void setSpeed(int speed){

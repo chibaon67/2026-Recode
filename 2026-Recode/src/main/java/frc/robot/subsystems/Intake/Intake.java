@@ -14,11 +14,11 @@ public class Intake extends SubsystemBase{
     public void run(boolean inverted){
         if(inverted)
         {
-            intakeMotor.set(0.7);
+            intakeMotor.set(-0.7);
         }
         else
         {
-            intakeMotor.set(-0.7);
+            intakeMotor.set(0.7);
         }
         }
     public void setSpeed(int speed){

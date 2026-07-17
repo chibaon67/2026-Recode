@@ -19,13 +19,13 @@ public class Tunnel extends SubsystemBase{
     public void run(boolean inverted){
         if(inverted)
         {
-            topTunnelMotor.set(0.7);
-            bottomTunnelMotor.set(0.7);
+            topTunnelMotor.set(-0.7);
+            bottomTunnelMotor.set(-0.7);
         }
         else
         {
-            topTunnelMotor.set(-0.7);
-            bottomTunnelMotor.set(-0.7);
+            topTunnelMotor.set(0.7);
+            bottomTunnelMotor.set(0.7);
 
         }
         }
