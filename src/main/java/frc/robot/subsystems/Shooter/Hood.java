@@ -14,10 +14,10 @@ public class Hood extends SubsystemBase{
 
     public void adjustHood(boolean down){
         if(down){
-            hoodMotor.set(0.3);
+            hoodMotor.set(0.1);
         }
         else{
-            hoodMotor.set(-0.3);
+            hoodMotor.set(-0.1);
         }
     }
 

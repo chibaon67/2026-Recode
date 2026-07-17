@@ -4,21 +4,24 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.networktables.DoubleEntry;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class Intake extends SubsystemBase{
+    final DoubleEntry intakeSpeedEntry;
     private final TalonFX intakeMotor;
     public Intake(int motorID){
         intakeMotor = new TalonFX(motorID);
+        
     }
     public void run(boolean inverted){
         if(inverted)
         {
-            intakeMotor.set(-0.3);
+            intakeMotor.set(-0.7);
         }
         else
         {
-            intakeMotor.set(0.3);
+            intakeMotor.set(0.7);
         }
         }
     public void setSpeed(int speed){
