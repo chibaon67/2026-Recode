@@ -16,7 +16,7 @@ import org.littletonrobotics.junction.Logger;
 
 public class Hopper extends SubsystemBase{
     private final TalonFX hopperMotor;
-      final DoubleEntry hopperSpeedEntry; 
+    final DoubleEntry hopperSpeedEntry; 
 
     public Hopper(int motorID){
         hopperMotor = new TalonFX(motorID);
