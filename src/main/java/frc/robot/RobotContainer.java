@@ -67,6 +67,7 @@ public class RobotContainer {
             driverController.a().whileTrue(Commands.parallel(intake.intakeCommand(),tunnel.intakeCommand(), hopper.intakeCommand()));
             driverController.b().whileTrue(Commands.parallel(intake.outtakeComand(),tunnel.outtakeCommand(), hopper.outtakeCommand()));
             driverController.x().whileTrue(flywheel.spinCommand());
+            driverController.y().onTrue(Commands.parallel(hood.PIDCommand(0.5),turret.PIDCommand(0.4)));
             driverController.leftBumper().whileTrue(hood.downCommand());
             driverController.rightBumper().whileTrue(hood.upCommand());
             driverController.rightTrigger().whileTrue(turret.rightCommand());
