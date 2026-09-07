@@ -1,7 +1,7 @@
 package frc.robot.subsystems.Intake;
 
 import com.ctre.phoenix6.hardware.TalonFX;
-
+import com.pathplanner.lib.path.GoalEndState;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.networktables.DoubleEntry;
 // NetworkTable imports
@@ -14,17 +14,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.littletonrobotics.junction.Logger;
 
 
-public class Hopper extends SubsystemBase{
+public class Hopper extends SubsystemBase {
     private final TalonFX hopperMotor;
     final DoubleEntry hopperSpeedEntry; 
 
     public Hopper(int motorID){
         hopperMotor = new TalonFX(motorID);
          // Hopper Network Table
-    NetworkTableInstance inst = NetworkTableInstance.getDefault();
-    NetworkTable hopperTable = inst.getTable("Subsystems/Hopper");
-    hopperSpeedEntry = hopperTable.getDoubleTopic("hopperSpeed").getEntry(0);
-    hopperSpeedEntry.set(0.3);
+        NetworkTableInstance inst = NetworkTableInstance.getDefault();
+        NetworkTable hopperTable = inst.getTable("Subsystems/Hopper");
+        hopperSpeedEntry = hopperTable.getDoubleTopic("hopperSpeed").getEntry(0);
+        hopperSpeedEntry.set(0.3);
     }
     public void run(boolean inverted){
         if(inverted)
@@ -35,7 +35,8 @@ public class Hopper extends SubsystemBase{
         {
             hopperMotor.set(0.7);
         }
-        }
+    }
+
     public void setSpeed(int speed){
         hopperMotor.set(speed);
     }
@@ -48,8 +49,8 @@ public class Hopper extends SubsystemBase{
         return new RunCommand(()->run(false),this);
     }
 
-      public Command outtakeCommand(){
-        return new RunCommand(()-> run(true), this);
+    public Command outtakeCommand(){
+        return new RunCommand(() -> run(true), this);
     }
 
     public Command stopCommand(){
@@ -65,5 +66,4 @@ public class Hopper extends SubsystemBase{
 
 }
     
-
 
