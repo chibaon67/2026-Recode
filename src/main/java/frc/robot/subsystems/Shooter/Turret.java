@@ -71,6 +71,7 @@ public class Turret extends SubsystemBase{
     currentPosition = (turretMotor.getRotorPosition().getValueAsDouble()*GEAR_RATIO);
     Logger.recordOutput("Turret/targetPosition", targetPosition);
     Logger.recordOutput("Turret/currentPosition", currentPosition);
+    Logger.recordOutput("Mango", 4);
   }
 }
 
