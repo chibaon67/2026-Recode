@@ -67,7 +67,7 @@ public class RobotContainer {
             driverController.a().whileTrue(Commands.parallel(intake.intakeCommand(),tunnel.intakeCommand(), hopper.intakeCommand()));
             driverController.b().whileTrue(Commands.parallel(intake.outtakeComand(),tunnel.outtakeCommand(), hopper.outtakeCommand()));
             driverController.x().whileTrue(flywheel.spinCommand());
-            driverController.y().onTrue(Commands.parallel(hood.PIDCommand(0.5),turret.PIDCommand(0.4)));
+            driverController.y().whileTrue(Commands.parallel(hood.PIDCommand(0.5),turret.PIDCommand(0.4)));
             driverController.leftBumper().whileTrue(hood.downCommand());
             driverController.rightBumper().whileTrue(hood.upCommand());
             driverController.rightTrigger().whileTrue(turret.rightCommand());
@@ -94,11 +94,7 @@ public class RobotContainer {
             drivetrain.applyRequest(() -> idle).ignoringDisable(true)
         );
 
-        driverController.a().whileTrue(drivetrain.applyRequest(() -> brake));
-        driverController.b().whileTrue(drivetrain.applyRequest(() ->
-            point.withModuleDirection(new Rotation2d(-driverController.getLeftY(), -driverController.getLeftX()))
-        ));
-
+      
         // Run SysId routines when holding back/start and X/Y.
         // Note that each routine should be run exactly once in a single log.
         driverController.back().and(driverController.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
